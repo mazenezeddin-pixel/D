@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>فرص الاستثمار في سلاسل الإمداد الإنساني</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f3ee;
+    --surface: #ffffff;
+    --surface2: #f0ede8;
+    --border: #dedad4;
+    --gold: #9a7820;
+    --gold-light: #7a5e10;
+    --gold-dim: rgba(201, 168, 76, 0.12);
+    --gold-glow: rgba(201, 168, 76, 0.25);
+    --text: #1a1714;
+    --text-muted: #3a3730;
+    --text-dim: #5a5650;
+    --accent: #2a6496;
+    --accent2: #1a4a6e;
+    --red: #c0392b;
+    --green: #27ae60;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: #1a1714;
+    font-family: 'Noto Naskh Arabic', serif;
+    font-size: 17px;
+    line-height: 2;
+    overflow-x: hidden;
+  }
+
+  /* Background texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: 
+      radial-gradient(ellipse at 20% 20%, rgba(201,168,76,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(42,100,150,0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Header */
+  .header {
+    position: relative;
+    padding: 80px 0 60px;
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 48px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 2px;
+    padding: 8px 18px;
+    font-family: 'Noto Kufi Arabic', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+
+  .header-badge::before {
+    content: '';
+    display: block;
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  .header h1 {
+    font-family: 'Noto Kufi Arabic', sans-serif;
+    font-size: 42px;
+    font-weight: 900;
+    line-height: 1.3;
+    color: #1a1714;
+    margin-bottom: 16px;
+  }
+
+  .header h1 span {
+    color: var(--gold);
+  }
+
+  .header-subtitle {
+    font-size: 18px;
+    color: #3a3730;
+    line-height: 1.8;
+    max-width: 600px;
+  }
+
+  /* Decorative line */
+  .header-line {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(to left, transparent, var(--gold) 30%, var(--gold) 70%, transparent);
+    opacity: 0.3;
+  }
+
+  /* TOC / Navigation */
+  .toc {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 48px 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .toc-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-right: 3px solid var(--gold);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    color: #3a3730;
+    font-size: 14px;
+    font-family: 'Noto Kufi Arabic', sans-serif;
+  }
+
+  .toc-item:hover {
+    background: #ede9e2;
+    color: var(--gold);
+    border-color: var(--gold);
+    transform: translateX(-4px);
+  }
+
+  .toc-num {
+    font-size: 11px;
+    color: var(--gold);
+    font-weight: 700;
+    opacity: 0.7;
+    min-width: 24px;
+  }
+
+  /* Main content */
+  .main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 48px 80px;
+  }
+
+  /* Sections */
+  .section {
+    padding: 64px 0;
+    border-bottom: 1px solid var(--border);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .section-num {
+    font-family: 'Noto Kufi Arabic', sans-serif;
+    font-size: 64px;
+    font-weight: 900;
+    color: var(--gold);
+    opacity: 0.12;
+    line-height: 1;
+    min-width: 80px;
+    text-align: center;
+    direction: ltr;
+  }
+
+  .section-title {
+    font-family: 'Noto Kufi Arabic', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a1714;
+    line-height: 1.4;
+    padding-top: 8px;
+  }
+
+  .section-title::after {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 2px;
+    background: var(--gold);
+    margin-top: 12px;
+  }
+
+  p {
+    color: #1a1714;
+    margin-bottom: 20px;
+    line-height: 2.1;
+  }
+
+  /* Stats grid */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin: 36px 0;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 28px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--gold);
+  }
+
+  .stat-card::after {
+    content: '';
+    position: absolute;
+    bottom: -30px;
+    left: -30px;
+    width: 100px;
+    height: 100px;
+    background: var(--gold-glow);
+    border-radius: 50%;
+    filter: blur(30px);
+    pointer-events: none;
+  }
+
+  .stat-value {
+    font-family: 'Noto Kufi Arabic', sans-serif;
+    font-size: 40px;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    font-size: 14px;
+    color: #3a3730;
+    line-height: 1.6;
+  }
+
+  .stat-sub {
+    font-size: 12px;
+    color: #5a5650;
+    margin-top: 8px;
+    line-height: 1.5;
+    border-top: 1px solid var(--border);
+    padding-top: 10px;
+  }
+
+  /* Comparison cards */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 36px 0;
+  }
+
+  .compare-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 28px;
+  }
+
+  .compare-card.bad {
+    border-top: 3px solid var(--red);
+  }
+
+  .compare-card.good {
+    border-top: 3px solid var(--green);
+  }
+
+  .compare-title {
+    font-family: 'Noto Kufi Arabic', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .compare-card.bad .compare-title { color: #b03020; }
+  .compare-card.good .compare-title { color: #1e8040; }
+
+  .compare-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: #3a3730;
+    margin-bottom: 12px;
+    line-height: 1.7;
+  }
+
+  .compare-item::before {
+    content: '—';
+    color: #5a5650;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .compare-card.bad .compare-item::before { color: var(--red); opacity: 0.5; }
+  .compare-card.good .compare-item::before { color: var(--green); opacity: 0.5; }
+
+  /* Cost breakdown */
+  .cost-chart {
+    margin: 36px 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 32px;
+  }
+
+  .cost-chart-title {
+    font-family: 'Noto Kufi Arabic', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #3a3730;
+    margin-bottom: 28px;
+    text-align: center;
+    letter-spacing: 0.05em;
+  }
+
+  .cost-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .cost-label {
+    width: 220px;
+    flex-shrink: 0;
+    font-size: 14px;
+    color: #3a3730;
+    text-align: right;
+  }
+
+  .cost-bar-wrap {
+    flex: 1;
+    height: 32px;
+    background: #ede9e2;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cost-bar {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-right: 12px;
+    justify-content: flex-end;
+    transition: width 1s ease;
+  }
+
+  .cost-bar-val {
+    font-family: 'Noto Kufi Arabic', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.9);
+  }
+
+  .bar-commodity { background: linear-gradient(to left, #2a5080, #1a3050); }
+  .bar-shipping { background: linear-gradient(to left, #c9a84c, #8a6a1e); }
+  .bar-insurance { background: linear-gradient(to left, #d4830a, #9a5a00); }
+  .bar-storage { background: linear-gradient(to left, #2a7a5a, #1a4a3a); }
+  .bar-delivery { background: linear-gradient(to left, #7a4aaa, #4a1a7a); }
+  .bar-admin { background: linear-gradient(to left, #6a4a2a, #3a2a1a); }
+
+  /* Requirements list */
+  .req-list {
+    margin: 24px 0;
+    counter-reset: req-counter;
+  }
+
+  .req-item {
+    display: flex;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+    counter-increment: req-counter;
+  }
+
+  .req-item:last-child { border-bottom: none; }
+
+  .req-num {
+    font-family: 'Noto Kufi Arabic', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--gold);
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.2);
+    min-width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+
+  .req-content {}
+  .req-title {
+    font-family: 'Noto Kufi Arabic', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a1714;
+    margin-bottom: 6px;
+  }
+  .req-text {
+    font-size: 14px;
+    color: #3a3730;
+    line-height: 1.9;
+    margin: 0;
+  }
+
+  /* Callout / quote */
+  .callout {
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-right: 4px solid var(--gold);
+    padding: 28px 32px;
+    margin: 36px 0;
+    position: relative;
+  }
+
+  .callout::before {
+    content: '"';
+    position: absolute;
+    top: -10px;
+    right: 24px;
+    font-size: 80px;
+    color: var(--gold);
+    opacity: 0.15;
+    font-family: Georgia, serif;
+    line-height: 1;
+  }
+
+  .callout p {
+    color: #8a6010;
+    font-size: 17px;
+    line-height: 2;
+    margin: 0;
+    font-weight: 500;
+  }
+
+  /* Barrier cards */
+  .barrier-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 36px 0;
+  }
+
+  .barrier-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 24px;
+  }
+
+  .barrier-icon {
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+
+  .barrier-title {
+    font-family: 'Noto Kufi Arabic', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .barrier-text {
+    font-size: 13px;
+    color: #3a3730;
+    line-height: 1.9;
+    margin: 0;
+  }
+
+  /* Structure layers */
+  .layer {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    margin: 20px 0;
+    overflow: hidden;
+  }
+
+  .layer-header {
+    padding: 20px 28px;
+    background: #ede9e2;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .layer-badge {
+    font-family: 'Noto Kufi Arabic', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 2px;
+  }
+
+  .layer-1 .layer-badge { background: rgba(201,168,76,0.15); color: var(--gold); border: 1px solid rgba(201,168,76,0.3); }
+  .layer-2 .layer-badge { background: rgba(42,100,150,0.15); color: #5ba3d0; border: 1px solid rgba(42,100,150,0.3); }
+
+  .layer-title {
+    font-family: 'Noto Kufi Arabic', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1714;
+  }
+
+  .layer-body {
+    padding: 24px 28px;
+  }
+
+  .feature-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .feature-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    color: #3a3730;
+    line-height: 1.7;
+  }
+
+  .feature-list li::before {
+    content: '◆';
+    font-size: 7px;
+    color: var(--gold);
+    flex-shrink: 0;
+    margin-top: 6px;
+    opacity: 0.7;
+  }
+
+  /* Timeline */
+  .timeline {
+    margin: 36px 0;
+    position: relative;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    right: 24px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    opacity: 0.3;
+  }
+
+  .timeline-item {
+    display: flex;
+    gap: 24px;
+    padding: 20px 0;
+    padding-right: 60px;
+    position: relative;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    right: 18px;
+    top: 28px;
+    width: 13px;
+    height: 13px;
+    background: var(--gold);
+    border: 2px solid #f5f3ee;
+    border-radius: 50%;
+  }
+
+  .timeline-period {
+    font-family: 'Noto Kufi Arabic', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold);
+    min-width: 120px;
+    padding-top: 3px;
+  }
+
+  .timeline-content {}
+  .timeline-title {
+    font-family: 'Noto Kufi Arabic', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a1714;
+    margin-bottom: 6px;
+  }
+  .timeline-text {
+    font-size: 14px;
+    color: #3a3730;
+    line-height: 1.8;
+    margin: 0;
+  }
+
+  /* Hub spoke */
+  .hub-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 32px 0;
+  }
+
+  .hub-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 24px;
+  }
+
+  .hub-level {
+    font-family: 'Noto Kufi Arabic', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+    opacity: 0.8;
+  }
+
+  .hub-title {
+    font-family: 'Noto Kufi Arabic', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1714;
+    margin-bottom: 14px;
+  }
+
+  .hub-text {
+    font-size: 13px;
+    color: #3a3730;
+    line-height: 1.9;
+    margin: 0;
+  }
+
+  /* Footnote */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 48px;
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-text {
+    font-size: 12px;
+    color: #5a5650;
+    font-family: 'Noto Kufi Arabic', sans-serif;
+  }
+
+  .footer-mark {
+    font-family: 'Noto Kufi Arabic', sans-serif;
+    font-size: 12px;
+    color: var(--gold);
+    opacity: 0.5;
+  }
+
+  /* Scroll fade-in */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .header-inner { animation: fadeUp 0.8s ease forwards; }
+  .toc { animation: fadeUp 0.8s 0.2s ease both; }
+
+  /* Responsive */
+  @media (max-width: 700px) {
+    .header-inner, .main, .toc, .footer { padding-right: 24px; padding-left: 24px; }
+    .stats-grid, .compare-grid, .barrier-grid, .hub-grid, .toc-grid { grid-template-columns: 1fr; }
+    .feature-list { grid-template-columns: 1fr; }
+    .header h1 { font-size: 28px; }
+    .cost-label { width: 140px; font-size: 12px; }
+    .timeline-period { min-width: 80px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <div class="header-badge">دراسة استثمارية</div>
+    <h1>البنية الخفية لعقود<br><span>الإغاثة الإنسانية</span></h1>
+    <p class="header-subtitle">
+      كيف تكمن الفرص الحقيقية في إدارة سلسلة الإمداد لا في تجارة السلع ذاتها
+    </p>
+  </div>
+  <div class="header-line"></div>
+</header>
+
+<!-- TOC -->
+<nav class="toc">
+  <div class="toc-grid">
+    <a class="toc-item" href="#sec1"><span class="toc-num">1</span> حجم السوق</a>
+    <a class="toc-item" href="#sec2"><span class="toc-num">2</span> السر الاستثماري</a>
+    <a class="toc-item" href="#sec3"><span class="toc-num">3</span> هيكل التكلفة</a>
+    <a class="toc-item" href="#sec4"><span class="toc-num">4</span> حاجز الدخول</a>
+    <a class="toc-item" href="#sec5"><span class="toc-num">5</span> نموذج العمل</a>
+    <a class="toc-item" href="#sec6"><span class="toc-num">6</span> الذراع التشغيلي</a>
+    <a class="toc-item" href="#sec7"><span class="toc-num">7</span> بناء الكيان الكندي</a>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- INTRO -->
+  <div class="section visible" style="padding-top: 48px;">
+    <p>ترصد حكومات مجموعة السبع - وعلى رأسها كندا - ميزانيات سنوية تتجاوز عشرات المليارات من الدولارات لتمويل مشاريع الإغاثة الإنسانية والأمن الغذائي في مناطق النزاع. اليمن وحده يستقطب سنوياً ما يزيد على 2 مليار دولار من المساعدات الدولية، تشكل عقود التوريد والتوصيل فيها النسبة الأكبر من الإنفاق الفعلي. هذه الدراسة تكشف البنية الخفية لهذه العقود، وتُعرّف على الفرص الاستثمارية الحقيقية التي تكمن في إدارة سلسلة الإمداد لا في تجارة السلع ذاتها.</p>
+  </div>
+
+  <!-- SECTION 1 -->
+  <section class="section" id="sec1">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <h2 class="section-title">حجم السوق: ميزانيات الإغاثة في أرقام</h2>
+    </div>
+
+    <p>لفهم ضخامة الفرصة الاستثمارية، لا بد من النظر إلى الأرقام الرسمية التي تعلنها حكومات مجموعة السبع سنوياً. تُخصص هذه الدول ميزانيات ضخمة عبر وكالات متخصصة مثل الوكالة الكندية للتنمية الدولية (Global Affairs Canada)، والوكالة الأمريكية للتنمية الدولية (USAID)، والمكتب الأوروبي للمساعدات الإنسانية (ECHO). هذه الميزانيات لا تُنفَق على السلع وحدها، بل تمتد لتشمل تكاليف النقل والتأمين والتخزين والتوزيع — وهو ما يُشكّل جوهر الفرصة الاستثمارية.</p>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value">2 مليار</div>
+        <div class="stat-label">ميزانية اليمن سنوياً</div>
+        <div class="stat-sub">إجمالي المساعدات الإنسانية الدولية المخصصة لليمن في عام 2023 وفقاً لتقارير الأمم المتحدة</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">60٪</div>
+        <div class="stat-label">تكلفة سلسلة الإمداد</div>
+        <div class="stat-sub">نسبة تكاليف النقل والتأمين والتوصيل من إجمالي قيمة أي عقد إغاثة حكومي في مناطق النزاع</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">8 مليارات</div>
+        <div class="stat-label">ميزانية كندا التنموية</div>
+        <div class="stat-sub">إجمالي ميزانية المساعدة الدولية الكندية ODA المخصصة لعام 2023-2024</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">7 دول</div>
+        <div class="stat-label">مجموعة السبع</div>
+        <div class="stat-sub">عدد الدول المانحة الرئيسية التي تُدير صناديق إغاثة سيادية ضخمة وتبحث عن مقاولين معتمدين</div>
+      </div>
+    </div>
+
+    <p>تُشير البيانات إلى أن كندا وحدها خصصت في ميزانيتها الفيدرالية لعام 2023 أكثر من 700 مليون دولار كندي لمشاريع الأمن الغذائي. هذه الأموال لا تُدار بشكل مباشر من قِبَل الحكومة، بل تُفوّض إلى مقاولين من القطاع الخاص عبر عمليات مناقصة تنافسية تخضع لقوانين الشراء الحكومي الفيدرالي (Federal Procurement). الفجوة بين الميزانية المخصصة والقدرة التنفيذية الفعلية تُشكّل فرصة حقيقية للكيانات المؤهلة.</p>
+
+    <p>تتوزع هذه الميزانيات عبر عدة قنوات تمويلية رئيسية. في كندا، تُدير وزارة الشؤون العالمية (Global Affairs Canada) الصندوق الكندي للمساعدات الإنسانية، الذي يُخصص منه ما بين 40 و60٪ لمشاريع الأمن الغذائي في مناطق النزاع. كما تُشارك كندا في صناديق متعددة الأطراف مثل برنامج الأغذية العالمي (WFP) والصندوق المركزي للاستجابة للطوارئ CERF التابع للأمم المتحدة، حيث تُساهم بمئات الملايين سنوياً. في الولايات المتحدة، يتجاوز إنفاق USAID على الأمن الغذائي 3 مليارات دولار سنوياً، مع تخصيص نسبة كبيرة لعقود التوريد والتوصيل في مناطق مثل اليمن والصومال وجنوب السودان. المملكة المتحدة تُدير عبر مكتب المساعدات الخارجية (FCDO) ميزانية تزيد على 1.5 مليار جنيه إسترليني للمساعدات الإنسانية، مع تركيز متزايد على عقود الإمداد الغذائي. هذا التنوع في مصادر التمويل يُتيح للمقاولين المؤهلين فرصاً متعددة ومتكررة على مدار العام.</p>
+  </section>
+
+  <!-- SECTION 2 -->
+  <section class="section" id="sec2">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <h2 class="section-title">السر الاستثماري: أين تكمن الأرباح الحقيقية؟</h2>
+    </div>
+
+    <div class="compare-grid">
+      <div class="compare-card bad">
+        <div class="compare-title">⚠ الوهم الشائع</div>
+        <p style="font-size:14px; color:#3a3730; margin-bottom:16px;">يعتقد معظم التجار أن الربح يكمن في شراء القمح أو الأرز بأسعار منخفضة وبيعه بأسعار أعلى. هذا النموذج التقليدي يُنتج هوامش ربح لا تتجاوز 8-12٪.</p>
+        <div class="compare-item">هوامش ربح ضيقة على السلع الأساسية</div>
+        <div class="compare-item">تعرض مباشر لتقلبات الأسواق العالمية</div>
+        <div class="compare-item">منافسة شديدة من تجار الجملة الكبار</div>
+        <div class="compare-item">لا قيمة مضافة حقيقية تُبرر السعر</div>
+      </div>
+      <div class="compare-card good">
+        <div class="compare-title">✓ الحقيقة التي لا يراها الجميع</div>
+        <p style="font-size:14px; color:#3a3730; margin-bottom:16px;">العوائد الحقيقية تأتي من "تكلفة إيصال السلعة" لا من "قيمتها". الحكومة تدفع مقابل ضمان وصول الغذاء إلى المستفيد في منطقة نزاع.</p>
+        <div class="compare-item">علاوة المخاطرة تصل إلى 35٪</div>
+        <div class="compare-item">تكاليف التأمين البحري والجوي المرتفعة</div>
+        <div class="compare-item">تكاليف التخزين الآمن في بيئات غير مستقرة</div>
+        <div class="compare-item">تكاليف التوزيع الأخير (Last-Mile Delivery)</div>
+      </div>
+    </div>
+
+    <p>لتوضيح الفارق بشكل ملموس، لنأخذ مثالاً على عقد توريد قمح بقيمة اسمية تبلغ 10 ملايين دولار. في النموذج التقليدي، يشتري التاجر القمح من السوق العالمية بسعر 300 دولار للطن، ويبيعه للحكومة بسعر 335 دولار للطن، محققاً هامش ربح لا يتجاوز 11.7٪ أي نحو 1.17 مليون دولار. لكن هذا الهامش يتآكل بسرعة بسبب تقلبات الأسعار وتكاليف التمويل. في المقابل، إذا ركّز المقاول على إدارة سلسلة الإمداد كاملةً، فإن هيكل التكلفة يتغير جذرياً: تكلفة السلعة 4 ملايين دولار (40٪)، النقل البحري والجوي 2.5 مليون (25٪)، التأمين 1.5 مليون (15٪)، التخزين والمستودعات 1 مليون (10٪)، والتوزيع الأخير 1 مليون (10٪). الحكومة تدفع السعر الكامل البالغ 10 ملايين، والمقاول الذي يدير هذه السلسلة يحقق عائداً إجمالياً يتجاوز 35-45٪ على رأس ماله التشغيلي، لأن معظم بنود التكلفة هي خدمات يملكها أو يتحكم فيها.</p>
+
+    <p>تُعدّ علاوة المخاطر (Risk Premium) أحد أهم مكوّنات الربحية في العقود اللوجستية المرتبطة بمناطق النزاع، ليس لأنها "ربح مباشر"، بل لأنها تعكس ندرة القدرة التشغيلية في البيئات عالية الخطورة. ففي أسواق مثل اليمن، تؤدي المخاطر الأمنية وعدم الاستقرار إلى ارتفاع كبير في تكاليف التأمين البحري والجوي، ورسوم النقل، والامتثال، مقارنة بالأسواق المستقرة. كما تفرض شركات الشحن والتأمين رسوماً إضافية مرتبطة بمخاطر الحرب (War Risk Charges)، تختلف بحسب خط الملاحة، وطبيعة الحمولة، ومستوى التهديد الأمني، وقد ترفع التكلفة التشغيلية للشحنة بشكل كبير.</p>
+    <p>هذه التكاليف تُحتسب ضمن هيكل العقد الحكومي أو الإنساني، ما يمنح الشركات القادرة على إدارة المخاطر، وتأمين الوصول، والحفاظ على استمرارية سلسلة الإمداد، قدرة على تحقيق هوامش أعلى من تلك المتاحة في تجارة السلع التقليدية. لذلك، فإن القيمة الاقتصادية الحقيقية في هذا القطاع لا تكمن في السلعة نفسها، بل في القدرة على إيصالها بشكل موثوق وآمن إلى المستفيد النهائي داخل البيئات الهشة أو غير المستقرة.</p>
+
+    <div class="callout">
+      <p>المقاول الذي يمتلك القدرة على إدارة سلسلة الإمداد كاملةً - من الميناء إلى المستفيد النهائي - يسيطر على 60٪ من قيمة العقد، بينما لا يملك تاجر السلع سوى 40٪ المتبقية.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 3 -->
+  <section class="section" id="sec3">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <h2 class="section-title">هيكل تكلفة العقد: تفكيك الـ 60٪</h2>
+    </div>
+
+    <p>لفهم كيفية تعظيم الأرباح، يجب تفكيك هيكل التكلفة في أي عقد إغاثة حكومي نموذجي. العقد الذي تبلغ قيمته الإجمالية 10 ملايين دولار لا يعني أن الحكومة تدفع 10 ملايين مقابل سلع بقيمة 10 ملايين. بل تدفع مقابل "خدمة إيصال متكاملة" تتوزع تكاليفها على عدة مراحل، كل مرحلة منها تُشكّل فرصة ربح مستقلة.</p>
+
+    <div class="cost-chart">
+      <div class="cost-chart-title">توزيع تكاليف العقد الحكومي النموذجي — 10 ملايين دولار</div>
+
+      <div class="cost-row">
+        <div class="cost-label">تكلفة السلعة الأساسية</div>
+        <div class="cost-bar-wrap">
+          <div class="cost-bar bar-commodity" style="width:40%"><span class="cost-bar-val">40٪</span></div>
+        </div>
+      </div>
+      <div class="cost-row">
+        <div class="cost-label">النقل البحري والجوي</div>
+        <div class="cost-bar-wrap">
+          <div class="cost-bar bar-shipping" style="width:18%"><span class="cost-bar-val">18٪</span></div>
+        </div>
+      </div>
+      <div class="cost-row">
+        <div class="cost-label">التأمين وعلاوة المخاطرة</div>
+        <div class="cost-bar-wrap">
+          <div class="cost-bar bar-insurance" style="width:15%"><span class="cost-bar-val">15٪</span></div>
+        </div>
+      </div>
+      <div class="cost-row">
+        <div class="cost-label">التخزين والمستودعات</div>
+        <div class="cost-bar-wrap">
+          <div class="cost-bar bar-storage" style="width:10%"><span class="cost-bar-val">10٪</span></div>
+        </div>
+      </div>
+      <div class="cost-row">
+        <div class="cost-label">التوزيع الأخير</div>
+        <div class="cost-bar-wrap">
+          <div class="cost-bar bar-delivery" style="width:9%"><span class="cost-bar-val">9٪</span></div>
+        </div>
+      </div>
+      <div class="cost-row">
+        <div class="cost-label">الإدارة والامتثال</div>
+        <div class="cost-bar-wrap">
+          <div class="cost-bar bar-admin" style="width:8%"><span class="cost-bar-val">8٪</span></div>
+        </div>
+      </div>
+    </div>
+
+    <p>يُظهر هيكل التكلفة أن تكلفة السلعة الأساسية لا تتجاوز 40٪ من إجمالي العقد. الـ 60٪ المتبقية تتوزع على خدمات لوجستية وتأمينية وتشغيلية - وهي الخدمات التي يمكن للمقاول المؤهل التحكم فيها وتعظيم هوامش ربحه منها. النقل البحري والجوي الدولي يُمثّل النسبة الأكبر (18٪) نظراً لارتفاع تكاليف الشحن إلى موانئ مناطق النزاع، حيث تُفرض رسوم إضافية خاصة بالمناطق عالية الخطورة (War Risk Surcharges).</p>
+
+    <p>التأمين وعلاوة المخاطرة (15٪) يعكسان التكلفة الفعلية لتأمين الشحنات في بيئات غير مستقرة، وهي تكلفة تتضاعف في مناطق مثل اليمن وسوريا وجنوب السودان. التخزين والمستودعات (10٪) يشمل تكاليف تأجير وتشغيل مرافق التخزين الآمنة القريبة من مناطق التوزيع، بينما يُمثّل التوزيع الأخير (9٪) التحدي الأكبر لوجستياً نظراً لضرورة إيصال المساعدات إلى مناطق قد تكون تحت سيطرة أطراف متنازعة. بند الإدارة والامتثال (8٪) يغطي تكاليف فرق الامتثال المالي والتدقيق وإعداد التقارير المطلوبة من الجهات المانحة.</p>
+
+    <p>من منظور المقاول، تكمن الفرصة الحقيقية في التحكم الرأسي في هذه السلسلة. المقاول الذي يمتلك أسطول نقل خاصاً أو اتفاقيات حصرية مع شركات شحن، ومستودعات مؤمنة في الموانئ الوسيطة، وشبكة توزيع محلية موثوقة - يستطيع تخفيض تكاليفه الفعلية بنسبة 20-30٪ مقارنةً بالأسعار السوقية، مع الحفاظ على تسعير العقد الكامل. هذا الفارق بين التكلفة الفعلية والسعر المتعاقد عليه هو مصدر الربحية الأساسي. على سبيل المثال، إذا نجح المقاول في تخفيض تكلفة النقل من 18٪ إلى 13٪ عبر اتفاقيات حصرية، وتخفيض تكلفة التأمين من 15٪ إلى 10٪ عبر برامج تأمين ذاتي مدروسة، فإنه يُضيف 10 نقاط مئوية إضافية إلى هامش ربحه دون المساس بجودة الخدمة المقدمة.</p>
+  </section>
+
+  <!-- SECTION 4 -->
+  <section class="section" id="sec4">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <h2 class="section-title">حاجز الدخول: لماذا لا تُمنح العقود مباشرةً؟</h2>
+    </div>
+
+    <p>السؤال الجوهري الذي يطرحه أي مستثمر ذكي: إذا كانت هذه الفرص بهذا الحجم، فلماذا لا يستفيد منها التجار المحليون في الشرق الأوسط مباشرةً؟ الإجابة تكمن في منظومة معقدة من القوانين واللوائح التي تُشكّل حاجز دخول حقيقياً - وهو الحاجز الذي يُحوّل هذه الفرصة إلى ميزة تنافسية دائمة لمن يمتلك المفتاح.</p>
+
+    <div class="barrier-grid">
+      <div class="barrier-card">
+        <div class="barrier-icon">🏦</div>
+        <div class="barrier-title">قوانين الامتثال المالي (AML/KYC)</div>
+        <p class="barrier-text">تُطالب الحكومات الغربية بمعايير صارمة لمكافحة غسيل الأموال والتحقق من الهوية. الشركات في مناطق النزاع لا تستطيع تلبية هذه المتطلبات بسبب غياب البنية المصرفية الرسمية وصعوبة التحقق من سلاسل الملكية.</p>
+      </div>
+      <div class="barrier-card">
+        <div class="barrier-icon">📋</div>
+        <div class="barrier-title">الشفافية المالية والإفصاح</div>
+        <p class="barrier-text">تتطلب العقود إفصاحاً مالياً كاملاً وفق معايير (IFRS) وتدقيقاً سنوياً من مكاتب معتمدة.</p>
+      </div>
+      <div class="barrier-card">
+        <div class="barrier-icon">⚖️</div>
+        <div class="barrier-title">قوانين العقوبات والجزاءات</div>
+        <p class="barrier-text">تخضع التعاملات مع مناطق النزاع لقوانين دولية معقدة (مثل OFAC الأمريكية والعقوبات الكندية). أي خطأ قد يُعرّض الشركة لعقوبات جنائية شديدة.</p>
+      </div>
+      <div class="barrier-card">
+        <div class="barrier-icon">🏛️</div>
+        <div class="barrier-title">متطلبات التسجيل والترخيص</div>
+        <p class="barrier-text">للتأهل للمناقصات في كندا، يجب أن يكون الكيان مسجلاً ككيان كندي، يمتلك رقماً ضريبياً، ومسجلاً في منصة الموردين الفيدرالية (CanadaBuys).</p>
+      </div>
+    </div>
+
+    <p>هذا الحاجز ليس عيباً في النظام – بل هو ميزة مصممة عمداً. الحكومات الغربية تُفضّل التعاقد مع كيانات خاضعة لولايتها القضائية، حيث يمكن محاسبتها قانونياً في حال الإخلال بالعقد أو الانخراط في ممارسات فاسدة. هذا التفضيل النظامي يخلق فرصة ذهبية لأي رائد أعمال يمتلك كياناً غربياً مؤهلاً وقادراً على إدارة العمليات مع مقاولي الباطن على الأرض.</p>
+
+    <p>على المستوى العملي، تتضمن متطلبات الامتثال في كندا عدة طبقات متداخلة:</p>
+
+    <div class="req-list">
+      <div class="req-item">
+        <div class="req-num">1</div>
+        <div class="req-content">
+          <div class="req-title">التسجيل الفيدرالي</div>
+          <p class="req-text">يجب أن تكون الشركة مسجلة في السجل الفيدرالي للشركات (Corporations Canada) وتحمل رقم هوية ضريبية (Business Number) صالحاً.</p>
+        </div>
+      </div>
+      <div class="req-item">
+        <div class="req-num">2</div>
+        <div class="req-content">
+          <div class="req-title">منصة CanadaBuys</div>
+          <p class="req-text">يجب التسجيل في منصة CanadaBuys (عبر نظام SAP Ariba) وهي المنصة الرسمية الحالية لجميع المناقصات الحكومية الفيدرالية.</p>
+        </div>
+      </div>
+      <div class="req-item">
+        <div class="req-num">3</div>
+        <div class="req-content">
+          <div class="req-title">شهادات الامتثال القانوني</div>
+          <p class="req-text">يتطلب التأهل للمناقصات الكبرى تقديم شهادات امتثال لقانون مكافحة الفساد الخارجي (CFPOA) وقانون مكافحة غسيل الأموال وتمويل الإرهاب (PCMLTFA).</p>
+        </div>
+      </div>
+      <div class="req-item">
+        <div class="req-num">4</div>
+        <div class="req-content">
+          <div class="req-title">إثبات القدرة المالية</div>
+          <p class="req-text">يجب إثبات القدرة المالية عبر تقارير مالية مدققة لثلاث سنوات على الأقل، وتوفير ضمانات بنكية (Bid Bonds و Performance Bonds) قد تصل إلى 10-25% من قيمة العقد.</p>
+        </div>
+      </div>
+    </div>
+
+    <p>هذه المتطلبات مجتمعة تُشكّل حاجزاً لا تستطيع معظم الشركات الإقليمية تجاوزه دون وجود كيان غربي وسيط.</p>
+  </section>
+
+  <!-- SECTION 5 -->
+  <section class="section" id="sec5">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <h2 class="section-title">نموذج العمل: الهيكلة المؤسسية المزدوجة</h2>
+    </div>
+
+    <p>الابتكار الجوهري في هذا النموذج ليس في فكرة العمل ذاتها – بل في الهيكلة المؤسسية التي تفصل بين "جلب العقود" و"تنفيذها". هذا الفصل الاستراتيجي يُحقق هدفين في آن واحد: تعظيم الأرباح من خلال التحكم في كل مرحلة من مراحل سلسلة القيمة، وحماية الأصول من خلال عزل المخاطر القانونية والتشغيلية في كيانات منفصلة.</p>
+
+    <p>البنية المزدوجة للنموذج تعتمد على واجهة غربية كندية في الطبقة الأولى تتولى الحصول على العقود السيادية مباشرةً، بينما الذراع التشغيلي في الطبقة الثانية يُنفذ العمليات على الأرض كمقاول باطن حصري. هذا الفصل يُتيح لكل كيان التركيز على ما يُجيده مع حماية الأصول عبر العزل القانوني.</p>
+
+    <div class="layer layer-1">
+      <div class="layer-header">
+        <span class="layer-badge">الطبقة الأولى</span>
+        <span class="layer-title">الواجهة الغربية الكندية</span>
+      </div>
+      <div class="layer-body">
+        <p style="font-size:14px; margin-bottom:20px;">شركة كندية مسجلة فيدرالياً، تمتلك جميع التراخيص والتصاريح اللازمة للتعاقد المباشر مع الحكومة الكندية. هذه الشركة لا تمتلك أصولاً مادية ثقيلة – بل تمتلك "القدرة القانونية" على الفوز بالعقود. هي البوابة الوحيدة التي تمر منها جميع التدفقات المالية الرسمية.</p>
+        <ul class="feature-list">
+          <li>تسجيل فيدرالي كندي كامل</li>
+          <li>رقم ضريبي وتصاريح استيراد/تصدير</li>
+          <li>تسجيل في قاعدة بيانات الموردين الحكوميين</li>
+          <li>امتثال كامل لقوانين مكافحة الفساد (CFPOA)</li>
+          <li>علاقات مؤسسية مع Global Affairs Canada</li>
+          <li>بوابة التدفقات المالية الرسمية</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="layer layer-2">
+      <div class="layer-header">
+        <span class="layer-badge">الطبقة الثانية</span>
+        <span class="layer-title">الذراع التشغيلي الميداني</span>
+      </div>
+      <div class="layer-body">
+        <p style="font-size:14px; margin-bottom:20px;">شركة ذات أصول لوجستية حقيقية – مستودعات، أسطول نقل، شبكة توزيع – تعمل كمقاول باطن حصري (Exclusive Subcontractor) للواجهة الغربية. هذه الشركة تتولى التنفيذ الفعلي على الأرض وتُدير العلاقات مع المقاولين المحليين في مناطق النزاع.</p>
+        <ul class="feature-list">
+          <li>مستودعات مؤمنة في موانئ وسيطة</li>
+          <li>أسطول نقل بري وبحري</li>
+          <li>فرق تشغيلية في مناطق النزاع</li>
+          <li>أنظمة تتبع ورقابة على الشحنات</li>
+          <li>شبكة توزيع محلية موثوقة</li>
+          <li>إدارة المخاطر التشغيلية</li>
+        </ul>
+      </div>
+    </div>
+
+    <p>هذا النموذج الهيكلي يُتيح مرونة تشغيلية وقانونية عالية. في حال تعرض الذراع التشغيلي لأي مشكلة قانونية أو تشغيلية في منطقة نزاع، تبقى الواجهة الغربية الكندية محميةً ومعزولةً عن هذه المخاطر. والعكس صحيح: في حال تغيرت الظروف التنظيمية في كندا، يمكن نقل الذراع التشغيلي إلى كيان آخر دون التأثير على العقود القائمة.</p>
+
+    <p style="margin-top:36px; font-family:'Noto Kufi Arabic'; font-size:18px; font-weight:700; color:var(--gold);">الواجهة الغربية: بناء الكيان الكندي</p>
+
+    <p>الواجهة الغربية هي الأساس الذي يقوم عليه النموذج بأكمله. بدون كيان كندي مؤهل قانونياً ومؤسسياً، لا يمكن الوصول إلى العقود السيادية. لكن بناء هذا الكيان يتطلب أكثر من مجرد تسجيل شركة — فهو يحتاج إلى بنية امتثال كاملة، وشبكة علاقات مؤسسية، وقدرة على إثبات الجدارة أمام الجهات الحكومية.</p>
+
+    <div class="req-list">
+      <div class="req-item">
+        <div class="req-num">1</div>
+        <div class="req-content">
+          <div class="req-title">التأسيس والتسجيل الفيدرالي</div>
+          <p class="req-text">تسجيل الشركة في Corporations Canada تحت قانون الشركات الكندي (CBCA)، والحصول على رقم هوية ضريبية (Business Number)، وفتح حساب بنكي تجاري في بنك كندي كبير (RBC، TD، أو BMO).</p>
+        </div>
+      </div>
+      <div class="req-item">
+        <div class="req-num">2</div>
+        <div class="req-content">
+          <div class="req-title">التراخيص والتصاريح الأساسية</div>
+          <p class="req-text">الحصول على تصاريح الاستيراد والتصدير من Canada Border Services Agency (CBSA)، والتسجيل في برنامج المستورد المعتمد (PIP)، والحصول على شهادات المنشأ اللازمة للتجارة الدولية.</p>
+        </div>
+      </div>
+      <div class="req-item">
+        <div class="req-num">3</div>
+        <div class="req-content">
+          <div class="req-title">التسجيل في منصات الشراء الحكومي</div>
+          <p class="req-text">التسجيل في منصة CanadaBuys الفيدرالية وإنشاء ملف مورد كامل عبر نظام SAP Ariba، والحصول على تصنيفات NAICS المناسبة لخدمات الإمداد واللوجستيات الإغاثية، وتحديداً تصنيف تجارة الجملة للمنتجات الغذائية (4244) وتصنيف خدمات ترتيب نقل البضائع والشحن (488510).</p>
+        </div>
+      </div>
+      <div class="req-item">
+        <div class="req-num">4</div>
+        <div class="req-content">
+          <div class="req-title">بناء الامتثال المؤسسي</div>
+          <p class="req-text">تطوير سياسات داخلية للامتثال لقانون مكافحة الفساد الخارجي (CFPOA)، وقانون مكافحة غسيل الأموال وتمويل الإرهاب (PCMLTFA)، وإنشاء لجنة امتثال داخلية مع مسؤول امتثال مخصص (Compliance Officer) متمكن من آليات التدقيق الصارم (KYC) الخاصة بالمناطق عالية المخاطر.</p>
+        </div>
+      </div>
+      <div class="req-item">
+        <div class="req-num">5</div>
+        <div class="req-content">
+          <div class="req-title">بناء العلاقات المؤسسية (Lobbying)</div>
+          <p class="req-text">التسجيل في سجل جماعات الضغط الكندي (Registry of Lobbyists)، وبناء علاقات مع موظفي Global Affairs Canada عبر حضور الفعاليات الرسمية والمؤتمرات الدولية المتخصصة في الإغاثة الإنسانية، إلى جانب بناء شراكات وتأهيل الكيان كمورد معتمد لدى منظمات الأمم المتحدة والوكالات الدولية الشريكة التي تدير التمويل الكندي.</p>
+        </div>
+      </div>
+    </div>
+
+    <p>الخطوة الخامسة — بناء العلاقات المؤسسية — هي الأكثر حساسية والأعلى قيمةً في هذا النموذج. في كندا، يُنظَّم نشاط الضغط (Lobbying) بموجب قانون جماعات الضغط الفيدرالي، ويجب على أي شخص يتواصل مع موظفين حكوميين رفيعي المستوى لأغراض تجارية التسجيل في السجل الوطني لجماعات الضغط خلال 10 أيام من بدء النشاط. هذا التسجيل ليس عائقاً — بل هو غطاء قانوني يُضفي الشرعية على جهود بناء العلاقات. العلاقات الفعّالة في هذا السياق لا تعني المحسوبية، بل تعني الحضور المؤسسي المستمر: المشاركة في جلسات الاستشارة العامة التي تُجريها Global Affairs Canada، والحضور في مؤتمرات مثل مؤتمر المساعدة الإنسانية الكندي السنوي، وبناء سمعة كشريك لوجستي وإغاثي موثوق قبل تقديم أي عرض سعر.</p>
+
+    <p style="margin-top:36px; font-family:'Noto Kufi Arabic'; font-size:18px; font-weight:700; color:#1a1714;">الجدول الزمني للتأسيس</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">الأشهر 1-3</div>
+        <div class="timeline-content">
+          <div class="timeline-title">التأسيس القانوني</div>
+          <p class="timeline-text">التسجيل الفيدرالي والتسجيلات الأساسية</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">الأشهر 4-6</div>
+        <div class="timeline-content">
+          <div class="timeline-title">البنية المصرفية والامتثال</div>
+          <p class="timeline-text">بناء البنية المصرفية والحصول على التصاريح التجارية وتأهيل أنظمة الامتثال المالي</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">الأشهر 7-12</div>
+        <div class="timeline-content">
+          <div class="timeline-title">التسجيل في المنصات</div>
+          <p class="timeline-text">التسجيل في منصات الشراء الحكومي والدولي وبناء ملف الامتثال</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">الأشهر 13-18</div>
+        <div class="timeline-content">
+          <div class="timeline-title">بناء العلاقات والتأهل</div>
+          <p class="timeline-text">بناء العلاقات المؤسسية والتأهل الفعلي للمناقصات الكبرى</p>
+        </div>
+      </div>
+    </div>
+
+    <p>خلال هذه الفترة الانتقالية، يمكن البدء بعقود صغيرة (تحت 25,000 دولار) لبناء سجل أداء (Track Record) يُعزّز فرص الفوز بالعقود الأكبر لاحقاً.</p>
+  </section>
+
+  <!-- SECTION 6 -->
+  <section class="section" id="sec6">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <h2 class="section-title">الذراع التشغيلي: إدارة سلسلة الإمداد في مناطق النزاع</h2>
+    </div>
+
+    <p>إذا كانت الواجهة الغربية هي "العقل" الذي يفوز بالعقود، فإن الذراع التشغيلي هو "العضلات" التي تُنفّذها. هذا الكيان هو الذي يُولّد القيمة الحقيقية ويُبرر الهوامش المرتفعة في العقود. نجاحه يعتمد على ثلاثة محاور: الأصول المادية، والشراكات الاستراتيجية، والقدرة التشغيلية في بيئات معقدة.</p>
+
+    <p style="font-family:'Noto Kufi Arabic'; font-size:17px; font-weight:700; color:var(--gold); margin-bottom: 20px;">البنية التحتية اللوجستية (نموذج المحور والفروع — Hub and Spoke)</p>
+
+    <div class="hub-grid">
+      <div class="hub-card">
+        <div class="hub-level">المستوى الأول</div>
+        <div class="hub-title">مراكز الارتكاز الاستراتيجية</div>
+        <p class="hub-text">مستودعات مركزية في موانئ وسيطة آمنة مثل صلالة أو جيبوتي. تضمن حماية الكتلة الأكبر من المخزون بتكاليف تأمين منخفضة بعيداً عن تقلبات منطقة النزاع، وتُشكل نقطة انطلاق آمنة للعمليات.</p>
+      </div>
+      <div class="hub-card">
+        <div class="hub-level">المستوى الثاني</div>
+        <div class="hub-title">مستودعات العمليات المتقدمة</div>
+        <p class="hub-text">تقع داخل اليمن في المناطق المستقرة الخاضعة للحكومة الشرعية (عدن والمكلا). تعمل كمراكز عبور وتوزيع سريعة (Cross-docking facilities) لا للتخزين طويل الأجل، مما يُخفض التكاليف التأمينية الباهظة.</p>
+      </div>
+    </div>
+
+    <p style="font-family:'Noto Kufi Arabic'; font-size:17px; font-weight:700; color:var(--gold); margin: 36px 0 16px;">أسطول النقل والتوزيع (نموذج الأصول الخفيفة)</p>
+
+    <p>لا يحتاج الذراع التشغيلي إلى امتلاك كامل الأسطول — بل إلى اتفاقيات حصرية وعقود استئجار ذكية. الاعتماد على نموذج (Asset-Light) مع اتفاقيات استئجار طويلة الأجل (Long-Term Charter) يُقلل رأس المال المطلوب مع الحفاظ على التحكم التشغيلي. وبدلاً من الاعتماد المباشر على الخطوط العالمية الكبرى التي تتجنب مناطق النزاع، تُبنى الشراكات التشغيلية مع مشغلي خطوط التغذية الإقليمية (Feeder Operators) أو عبر الاستئجار المباشر للسفن (Vessel Chartering) لنقل الشحنات من الموانئ الوسيطة إلى موانئ الوجهة بأقل علاوة مخاطرة ممكنة، بالتوازي مع التعاقد مع أساطيل النقل البري المحلية.</p>
+
+    <p style="font-family:'Noto Kufi Arabic'; font-size:17px; font-weight:700; color:var(--gold); margin: 36px 0 16px;">التوزيع الأخير والشركاء المحليون</p>
+
+    <p>مرحلة التوصيل النهائي (Last-Mile Delivery) هي الأصعب لوجستياً والأكثر ربحية. الشراكة مع منظمات إغاثة محلية معتمدة وكيانات مجتمعية موثوقة تُتيح الوصول إلى المناطق الحرجة التي لا تستطيع الشركات التجارية التقليدية الدخول إليها. هذه الشراكات يجب أن تكون موثقة بعقود رسمية تخضع لفحص دقيق لضمان الامتثال لمتطلبات (KYC) الصارمة.</p>
+
+    <p style="font-family:'Noto Kufi Arabic'; font-size:17px; font-weight:700; color:var(--gold); margin: 36px 0 16px;">إدارة المخاطر التشغيلية وأنظمة التتبع</p>
+
+    <p>العمل في مناطق النزاع يتطلب بروتوكولات صارمة. يجب أن يمتلك الذراع التشغيلي نظام تتبع رقمي هجين يدمج بين المنصات العالمية للرؤية اللوجستية (مثل FourKites أو Project44) وأجهزة التتبع المعتمدة على الأقمار الصناعية لضمان استمرار الرقابة في مناطق انقطاع الاتصالات (Blackouts). يرافق ذلك بوالص تأمين شاملة تغطي مخاطر الحرب (War Risks) والقرصنة، وفرق أمن ميدانية مُدرَّبة للتقييم والتأمين. تكلفة هذه البنية الأمنية والتتبعية تتراوح بين 3-7٪ من قيمة العقد، لكنها تُبرر علاوة المخاطرة التي تتقاضاها الشركة من الحكومة المانحة.</p>
+
+    <p style="font-family:'Noto Kufi Arabic'; font-size:17px; font-weight:700; color:var(--gold); margin: 36px 0 16px;">هيكلية العمليات والقيادة المركزية</p>
+
+    <p>من الناحية التشغيلية، يُدار الذراع التشغيلي عبر هيكل قيادة لامركزي ميدانياً ومركزي إدارياً. يُعيَّن مدير عمليات إقليمي لكل منطقة نزاع (مثلاً: مدير عمليات اليمن)، ويكون مسؤولاً عن التنسيق مع الشركاء المحليين وإدارة المستودعات والأسطول في نطاقه الجغرافي. تُربط جميع مواقع العمليات بنظام إدارة موارد المؤسسات (ERP) مركزي يُتيح للواجهة الكندية مراقبة التدفقات المالية والتشغيلية في الوقت الفعلي، وهو شرط أساسي لتلبية متطلبات الشفافية والتقارير الدورية التي تفرضها الحكومة الكندية.</p>
+
+    <p>كما يمتلك الذراع التشغيلي بروتوكولات طوارئ مُفصّلة ومُعدّة مسبقاً للتعامل مع السيناريوهات عالية الخطورة: إغلاق الممرات الملاحية، تحويل مسار الشحنات، تدمير المستودعات، أو تقييد الوصول إلى مناطق التوزيع. توثيق هذه البروتوكولات واختبارها ميدانياً ليس مجرد إجراء وقائي، بل هو متطلب أساسي تطلبه الجهات المانحة كجزء من عملية التأهيل للمناقصات الكبرى.</p>
+
+    <div class="callout">
+      <p>تكلفة البنية الأمنية والتتبعية تتراوح بين 3-7٪ من قيمة العقد، لكنها تُبرر علاوة المخاطرة التي تتقاضاها الشركة من الحكومة المانحة. هذا الاستثمار في الشفافية هو ما يُميّز المقاولين المؤهلين عن المنافسين.</p>
+    </div>
+
+    <p style="font-family:'Noto Kufi Arabic'; font-size:17px; font-weight:700; color:var(--gold); margin: 36px 0 16px;">هيكلية العمليات والقيادة المركزية</p>
+
+    <p>من الناحية التشغيلية، يُدار الذراع التشغيلي عبر هيكل قيادة لامركزي ميدانياً ومركزي إدارياً. يُعيَّن مدير عمليات إقليمي لكل منطقة نزاع (مثلاً: مدير عمليات اليمن)، ويكون مسؤولاً عن التنسيق مع الشركاء المحليين وإدارة المستودعات والأسطول في نطاقه الجغرافي. تُربط جميع مواقع العمليات بنظام إدارة موارد المؤسسات (ERP) مركزي يُتيح للواجهة الكندية مراقبة التدفقات المالية والتشغيلية في الوقت الفعلي، وهو شرط أساسي لتلبية متطلبات الشفافية والتقارير الدورية التي تفرضها الحكومة الكندية. كما يمتلك الذراع التشغيلي بروتوكولات طوارئ مُفصّلة ومُعدّة مسبقاً للتعامل مع السيناريوهات عالية الخطورة: إغلاق الممرات الملاحية، تحويل مسار الشحنات، تدمير المستودعات، أو تقييد الوصول إلى مناطق التوزيع. توثيق هذه البروتوكولات واختبارها ميدانياً ليس مجرد إجراء وقائي، بل هو متطلب أساسي تطلبه الجهات المانحة كجزء من عملية التأهيل للمناقصات الكبرى.</p>
+
+  </section>
+
+  <!-- SECTION 7 — Lobbying & Western Entity -->
+  <section class="section" id="sec7">
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <h2 class="section-title">الواجهة الغربية: بناء الكيان الكندي</h2>
+    </div>
+
+    <p>الواجهة الغربية هي الأساس الذي يقوم عليه النموذج بأكمله. بدون كيان كندي مؤهل قانونياً ومؤسسياً، لا يمكن الوصول إلى العقود السيادية. لكن بناء هذا الكيان يتطلب أكثر من مجرد تسجيل شركة — فهو يحتاج إلى بنية امتثال كاملة، وشبكة علاقات مؤسسية، وقدرة على إثبات الجدارة أمام الجهات الحكومية.</p>
+
+    <div class="req-list">
+      <div class="req-item">
+        <div class="req-num">1</div>
+        <div class="req-content">
+          <div class="req-title">التأسيس والتسجيل الفيدرالي</div>
+          <p class="req-text">تسجيل الشركة في Corporations Canada تحت قانون الشركات الكندي (CBCA)، والحصول على رقم هوية ضريبية (Business Number)، وفتح حساب بنكي تجاري في بنك كندي كبير (RBC، TD، أو BMO).</p>
+        </div>
+      </div>
+      <div class="req-item">
+        <div class="req-num">2</div>
+        <div class="req-content">
+          <div class="req-title">التراخيص والتصاريح الأساسية</div>
+          <p class="req-text">الحصول على تصاريح الاستيراد والتصدير من Canada Border Services Agency (CBSA)، والتسجيل في برنامج المستورد المعتمد (PIP)، والحصول على شهادات المنشأ اللازمة للتجارة الدولية.</p>
+        </div>
+      </div>
+      <div class="req-item">
+        <div class="req-num">3</div>
+        <div class="req-content">
+          <div class="req-title">التسجيل في منصات الشراء الحكومي</div>
+          <p class="req-text">التسجيل في منصة CanadaBuys الفيدرالية وإنشاء ملف مورد كامل عبر نظام SAP Ariba، والحصول على تصنيفات NAICS المناسبة لخدمات الإمداد واللوجستيات الإغاثية، وتحديداً تصنيف تجارة الجملة للمنتجات الغذائية (4244) وتصنيف خدمات ترتيب نقل البضائع والشحن (488510).</p>
+        </div>
+      </div>
+      <div class="req-item">
+        <div class="req-num">4</div>
+        <div class="req-content">
+          <div class="req-title">بناء الامتثال المؤسسي</div>
+          <p class="req-text">تطوير سياسات داخلية للامتثال لقانون مكافحة الفساد الخارجي (CFPOA)، وقانون مكافحة غسيل الأموال وتمويل الإرهاب (PCMLTFA)، وإنشاء لجنة امتثال داخلية مع مسؤول امتثال مخصص (Compliance Officer) متمكن من آليات التدقيق الصارم (KYC) الخاصة بالمناطق عالية المخاطر.</p>
+        </div>
+      </div>
+      <div class="req-item">
+        <div class="req-num">5</div>
+        <div class="req-content">
+          <div class="req-title">بناء العلاقات المؤسسية (Lobbying)</div>
+          <p class="req-text">التسجيل في سجل جماعات الضغط الكندي (Registry of Lobbyists)، وبناء علاقات مع موظفي Global Affairs Canada عبر حضور الفعاليات الرسمية والمؤتمرات الدولية المتخصصة في الإغاثة الإنسانية، إلى جانب بناء شراكات وتأهيل الكيان كمورد معتمد لدى منظمات الأمم المتحدة والوكالات الدولية الشريكة التي تدير التمويل الكندي.</p>
+        </div>
+      </div>
+    </div>
+
+    <p>الخطوة الخامسة — بناء العلاقات المؤسسية — هي الأكثر حساسية والأعلى قيمةً في هذا النموذج. في كندا، يُنظَّم نشاط الضغط (Lobbying) بموجب قانون جماعات الضغط الفيدرالي، ويجب على أي شخص يتواصل مع موظفين حكوميين رفيعي المستوى لأغراض تجارية التسجيل في السجل الوطني لجماعات الضغط خلال 10 أيام من بدء النشاط. هذا التسجيل ليس عائقاً — بل هو غطاء قانوني يُضفي الشرعية على جهود بناء العلاقات. العلاقات الفعّالة في هذا السياق لا تعني المحسوبية، بل تعني الحضور المؤسسي المستمر: المشاركة في جلسات الاستشارة العامة التي تُجريها Global Affairs Canada، والحضور في مؤتمرات مثل مؤتمر المساعدة الإنسانية الكندي السنوي، وبناء سمعة كشريك لوجستي وإغاثي موثوق قبل تقديم أي عرض سعر.</p>
+
+    <p style="font-family:'Noto Kufi Arabic'; font-size:17px; font-weight:700; color:#1a1714; margin: 36px 0 16px;">الجدول الزمني للتأسيس الكامل</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">الأشهر 1-3</div>
+        <div class="timeline-content">
+          <div class="timeline-title">التأسيس القانوني والتسجيلات الأساسية</div>
+          <p class="timeline-text">تسجيل الشركة فيدرالياً، الحصول على Business Number، فتح الحسابات البنكية، وتأمين التصاريح الأولية.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">الأشهر 4-6</div>
+        <div class="timeline-content">
+          <div class="timeline-title">البنية المصرفية والامتثال المالي</div>
+          <p class="timeline-text">بناء البنية المصرفية والحصول على التصاريح التجارية وتأهيل أنظمة الامتثال المالي (AML/KYC).</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">الأشهر 7-12</div>
+        <div class="timeline-content">
+          <div class="timeline-title">التسجيل في منصات الشراء الدولي</div>
+          <p class="timeline-text">التسجيل في CanadaBuys ومنصات الأمم المتحدة وبناء ملف الامتثال الكامل.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">الأشهر 13-18</div>
+        <div class="timeline-content">
+          <div class="timeline-title">بناء العلاقات والتأهل للمناقصات الكبرى</div>
+          <p class="timeline-text">بناء العلاقات المؤسسية والتأهل الفعلي للمناقصات الكبرى. يمكن خلال هذه الفترة البدء بعقود صغيرة (تحت 25,000 دولار) لبناء سجل أداء (Track Record) يُعزّز فرص الفوز بالعقود الأكبر لاحقاً.</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-text">دراسة استثمارية — سلاسل الإمداد الإنساني</div>
+  <div class="footer-mark">2024 ◆ سري وخاص</div>
+</footer>
+
+<script>
+  // Intersection Observer for scroll animations
+  const sections = document.querySelectorAll('.section');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.08 });
+
+  sections.forEach(s => observer.observe(s));
+
+  // Smooth scroll for TOC
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // Animate bars on scroll
+  const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const bars = entry.target.querySelectorAll('.cost-bar');
+        bars.forEach(bar => {
+          const w = bar.style.width;
+          bar.style.width = '0';
+          setTimeout(() => { bar.style.width = w; }, 100);
+        });
+        barObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const chart = document.querySelector('.cost-chart');
+  if (chart) barObserver.observe(chart);
+</script>
+
+</body>
+</html>
