@@ -858,43 +858,65 @@
 
     <p>تُظهر العقود السيادية في قطاع الإغاثة أن القيمة الإجمالية للعقد لا تعبّر عن قيمة السلع وحدها، بل عن خدمة لوجستية متكاملة تشمل سلسلة توريد كاملة من بلد المنشأ حتى نقطة التوزيع الأخير. وعند تحليل عقد نموذجي بقيمة 10 ملايين دولار، يتبيّن أن السلعة الأساسية تمثّل 40٪ فقط من التكلفة، بينما تتوزع 60٪ على خدمات تشغيلية يمكن للمقاول المؤهل التحكم فيها وتعظيم هوامش ربحه.</p>
 
+    <!-- PIE CHART -->
     <div class="cost-chart">
       <div class="cost-chart-title">توزيع تكاليف العقد الحكومي النموذجي — 10 ملايين دولار</div>
+      <div style="display:flex; align-items:center; gap:48px; flex-wrap:wrap; justify-content:center; padding:20px 0; direction:rtl;">
 
-      <div class="cost-row">
-        <div class="cost-label">تكلفة السلعة الأساسية</div>
-        <div class="cost-bar-wrap">
-          <div class="cost-bar bar-commodity" style="width:40%"><span class="cost-bar-val">40٪</span></div>
-        </div>
-      </div>
-      <div class="cost-row">
-        <div class="cost-label">النقل البحري والجوي</div>
-        <div class="cost-bar-wrap">
-          <div class="cost-bar bar-shipping" style="width:18%"><span class="cost-bar-val">18٪</span></div>
-        </div>
-      </div>
-      <div class="cost-row">
-        <div class="cost-label">التأمين وعلاوة المخاطرة</div>
-        <div class="cost-bar-wrap">
-          <div class="cost-bar bar-insurance" style="width:15%"><span class="cost-bar-val">15٪</span></div>
-        </div>
-      </div>
-      <div class="cost-row">
-        <div class="cost-label">التخزين والمستودعات</div>
-        <div class="cost-bar-wrap">
-          <div class="cost-bar bar-storage" style="width:10%"><span class="cost-bar-val">10٪</span></div>
-        </div>
-      </div>
-      <div class="cost-row">
-        <div class="cost-label">التوزيع الأخير</div>
-        <div class="cost-bar-wrap">
-          <div class="cost-bar bar-delivery" style="width:9%"><span class="cost-bar-val">9٪</span></div>
-        </div>
-      </div>
-      <div class="cost-row">
-        <div class="cost-label">الإدارة والامتثال</div>
-        <div class="cost-bar-wrap">
-          <div class="cost-bar bar-admin" style="width:8%"><span class="cost-bar-val">8٪</span></div>
+        <!-- Donut Chart -->
+        <canvas id="costPieChart" width="220" height="220" style="max-width:220px; flex-shrink:0;"></canvas>
+
+        <!-- Card-style Legend -->
+        <div style="display:flex; flex-direction:column; gap:10px; flex:1; min-width:240px; max-width:420px;">
+
+          <div style="display:flex; align-items:center; justify-content:space-between; background:#f0ede8; border-radius:10px; padding:14px 18px;">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <span style="display:inline-block;width:16px;height:16px;background:#2a5080;border-radius:4px;flex-shrink:0;"></span>
+              <span style="font-size:15px; color:#1a1714; font-family:'Noto Kufi Arabic',sans-serif;">تكلفة السلعة الأساسية</span>
+            </div>
+            <span style="font-size:17px; font-weight:700; color:#2a5080; font-family:'Noto Kufi Arabic',sans-serif;">40٪</span>
+          </div>
+
+          <div style="display:flex; align-items:center; justify-content:space-between; background:#f0ede8; border-radius:10px; padding:14px 18px;">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <span style="display:inline-block;width:16px;height:16px;background:#c9a84c;border-radius:4px;flex-shrink:0;"></span>
+              <span style="font-size:15px; color:#1a1714; font-family:'Noto Kufi Arabic',sans-serif;">النقل البحري والجوي</span>
+            </div>
+            <span style="font-size:17px; font-weight:700; color:#c9a84c; font-family:'Noto Kufi Arabic',sans-serif;">18٪</span>
+          </div>
+
+          <div style="display:flex; align-items:center; justify-content:space-between; background:#f0ede8; border-radius:10px; padding:14px 18px;">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <span style="display:inline-block;width:16px;height:16px;background:#d4830a;border-radius:4px;flex-shrink:0;"></span>
+              <span style="font-size:15px; color:#1a1714; font-family:'Noto Kufi Arabic',sans-serif;">التأمين وعلاوة المخاطرة</span>
+            </div>
+            <span style="font-size:17px; font-weight:700; color:#d4830a; font-family:'Noto Kufi Arabic',sans-serif;">15٪</span>
+          </div>
+
+          <div style="display:flex; align-items:center; justify-content:space-between; background:#f0ede8; border-radius:10px; padding:14px 18px;">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <span style="display:inline-block;width:16px;height:16px;background:#2a7a5a;border-radius:4px;flex-shrink:0;"></span>
+              <span style="font-size:15px; color:#1a1714; font-family:'Noto Kufi Arabic',sans-serif;">التخزين والمستودعات</span>
+            </div>
+            <span style="font-size:17px; font-weight:700; color:#2a7a5a; font-family:'Noto Kufi Arabic',sans-serif;">10٪</span>
+          </div>
+
+          <div style="display:flex; align-items:center; justify-content:space-between; background:#f0ede8; border-radius:10px; padding:14px 18px;">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <span style="display:inline-block;width:16px;height:16px;background:#7a4aaa;border-radius:4px;flex-shrink:0;"></span>
+              <span style="font-size:15px; color:#1a1714; font-family:'Noto Kufi Arabic',sans-serif;">التوزيع الأخير</span>
+            </div>
+            <span style="font-size:17px; font-weight:700; color:#7a4aaa; font-family:'Noto Kufi Arabic',sans-serif;">9٪</span>
+          </div>
+
+          <div style="display:flex; align-items:center; justify-content:space-between; background:#f0ede8; border-radius:10px; padding:14px 18px;">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <span style="display:inline-block;width:16px;height:16px;background:#8a6040;border-radius:4px;flex-shrink:0;"></span>
+              <span style="font-size:15px; color:#1a1714; font-family:'Noto Kufi Arabic',sans-serif;">الإدارة والامتثال</span>
+            </div>
+            <span style="font-size:17px; font-weight:700; color:#8a6040; font-family:'Noto Kufi Arabic',sans-serif;">8٪</span>
+          </div>
+
         </div>
       </div>
     </div>
@@ -1018,6 +1040,71 @@
           <li>شبكة مقاولين محليين داخل مناطق النزاع</li>
           <li>إدارة كاملة للمخاطر التشغيلية الميدانية</li>
         </ul>
+      </div>
+    </div>
+
+    <!-- FLOWCHART -->
+    <div class="cost-chart" style="margin-top: 32px; padding: 36px 24px;">
+      <div class="cost-chart-title">الهيكل التشغيلي المزدوج — تدفق العمليات</div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:0; font-family:'Noto Kufi Arabic', sans-serif; direction:rtl;">
+
+        <!-- G7 Donors -->
+        <div style="background:#e8f0f8; border:1px solid #b0c8e0; border-radius:6px; padding:14px 28px; text-align:center; width:100%; max-width:420px;">
+          <div style="font-size:11px; color:#5a7a9a; font-weight:700; letter-spacing:0.08em; margin-bottom:4px;">الجهات المانحة السيادية</div>
+          <div style="font-size:14px; color:#1a3050; font-weight:700;">حكومات مجموعة السبع (كندا — USAID — ECHO)</div>
+        </div>
+
+        <!-- Arrow down -->
+        <div style="display:flex;flex-direction:column;align-items:center;margin:4px 0;">
+          <div style="width:2px;height:20px;background:#9a7820;"></div>
+          <div style="width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-top:10px solid #9a7820;"></div>
+          <div style="font-size:11px;color:#9a7820;font-weight:700;margin-top:4px;">عقود سيادية + تدفق مالي رسمي</div>
+        </div>
+
+        <!-- Canadian Entity -->
+        <div style="background:rgba(154,120,32,0.1); border:2px solid #9a7820; border-radius:6px; padding:18px 28px; text-align:center; width:100%; max-width:420px; position:relative;">
+          <div style="font-size:11px; color:#9a7820; font-weight:700; letter-spacing:0.08em; margin-bottom:4px;">الطبقة الأولى — الواجهة الغربية</div>
+          <div style="font-size:16px; color:#1a1714; font-weight:700;">الكيان الكندي المسجل فيدرالياً</div>
+          <div style="font-size:12px; color:#5a5650; margin-top:8px;">الأهلية القانونية · الامتثال · علاقات GAC · ذراع الضغط</div>
+        </div>
+
+        <!-- Arrow down -->
+        <div style="display:flex;flex-direction:column;align-items:center;margin:4px 0;">
+          <div style="width:2px;height:20px;background:#9a7820;"></div>
+          <div style="width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-top:10px solid #9a7820;"></div>
+          <div style="font-size:11px;color:#9a7820;font-weight:700;margin-top:4px;">عقد تعهيد حصري (Exclusive Subcontract)</div>
+        </div>
+
+        <!-- Operational Arm -->
+        <div style="background:#e8f4ee; border:2px solid #2a7a5a; border-radius:6px; padding:18px 28px; text-align:center; width:100%; max-width:420px;">
+          <div style="font-size:11px; color:#2a7a5a; font-weight:700; letter-spacing:0.08em; margin-bottom:4px;">الطبقة الثانية — الذراع التشغيلي</div>
+          <div style="font-size:16px; color:#1a1714; font-weight:700;">الكيان اللوجستي الميداني</div>
+          <div style="font-size:12px; color:#5a5650; margin-top:8px;">الأصول · المستودعات · الأسطول · شبكة التوزيع</div>
+        </div>
+
+        <!-- Arrow down -->
+        <div style="display:flex;flex-direction:column;align-items:center;margin:4px 0;">
+          <div style="width:2px;height:20px;background:#2a7a5a;"></div>
+          <div style="width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-top:10px solid #2a7a5a;"></div>
+          <div style="font-size:11px;color:#2a7a5a;font-weight:700;margin-top:4px;">توزيع ميداني + شراكات محلية</div>
+        </div>
+
+        <!-- Three hubs -->
+        <div style="display:flex; gap:12px; width:100%; max-width:520px; justify-content:center; flex-wrap:wrap;">
+          <div style="background:#f5f3ee; border:1px solid #dedad4; border-radius:6px; padding:12px 16px; text-align:center; flex:1; min-width:130px;">
+            <div style="font-size:11px; color:#9a7820; font-weight:700; margin-bottom:4px;">Hub رئيسي</div>
+            <div style="font-size:13px; color:#1a1714; font-weight:600;">صلالة / جيبوتي</div>
+          </div>
+          <div style="background:#f5f3ee; border:1px solid #dedad4; border-radius:6px; padding:12px 16px; text-align:center; flex:1; min-width:130px;">
+            <div style="font-size:11px; color:#2a7a5a; font-weight:700; margin-bottom:4px;">مستودع متقدم</div>
+            <div style="font-size:13px; color:#1a1714; font-weight:600;">عدن / المكلا</div>
+          </div>
+          <div style="background:#f5f3ee; border:1px solid #dedad4; border-radius:6px; padding:12px 16px; text-align:center; flex:1; min-width:130px;">
+            <div style="font-size:11px; color:#7a4aaa; font-weight:700; margin-bottom:4px;">توزيع أخير</div>
+            <div style="font-size:13px; color:#1a1714; font-weight:600;">المستفيد النهائي</div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -1215,6 +1302,8 @@
 
     <p>من الناحية التشغيلية، يُدار الذراع التشغيلي عبر هيكل قيادة لامركزي ميدانياً ومركزي إدارياً. يُعيَّن مدير عمليات إقليمي لكل منطقة نزاع، ويكون مسؤولاً عن التنسيق مع الشركاء المحليين وإدارة المستودعات والأسطول في نطاقه الجغرافي. تُربط كافة العقد التشغيلية بنظام تخطيط موارد المؤسسات (ERP) السحابي، مما يمنح الواجهة الكندية قدرة المراقبة الفورية (Real-Time Monitoring) للتدفقات المالية والمادية — وهو شرط أساسي لتلبية متطلبات الشفافية الصارمة للحكومة الكندية. كما يمتلك الذراع التشغيلي بروتوكولات طوارئ مُفصّلة للتعامل مع السيناريوهات عالية الخطورة: إغلاق الممرات الملاحية، تحويل مسار الشحنات، تدمير المستودعات، أو تقييد الوصول إلى مناطق التوزيع. توثيق هذه البروتوكولات واختبارها ميدانياً ليس مجرد إجراء وقائي، بل هو متطلب أساسي تطلبه الجهات المانحة كجزء من عملية التأهيل للمناقصات الكبرى.</p>
 
+
+
     <div class="callout">
       <p>في بيئات النزاع، لا تُقاس القيمة الاقتصادية بحجم السلعة، بل بالقدرة على إدارة تدفقها ضمن منظومة امتثال وسيطرة لوجستية معقدة. ومع استمرار توسع ميزانيات الإغاثة السيادية عالمياً، تتحول إدارة سلاسل الإمداد الإنسانية من نشاط تشغيلي تقليدي إلى فئة أصول استراتيجية قائمة بذاتها، تمتلك حواجز دخول مرتفعة وهوامش تشغيلية مرتبطة بالقدرة المؤسسية لا بتقلبات أسواق السلع.</p>
     </div>
@@ -1251,8 +1340,6 @@
       if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
-
-  // Animate bars on scroll
   const barObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -1269,6 +1356,36 @@
 
   const chart = document.querySelector('.cost-chart');
   if (chart) barObserver.observe(chart);
+  // Pie Chart
+  (function drawPieChart() {
+    const canvas = document.getElementById('costPieChart');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const cx = 110, cy = 110, r = 100, inner = 42;
+    const data = [
+      { pct: 40, color: '#2a5080' },
+      { pct: 18, color: '#c9a84c' },
+      { pct: 15, color: '#d4830a' },
+      { pct: 10, color: '#2a7a5a' },
+      { pct: 9,  color: '#7a4aaa' },
+      { pct: 8,  color: '#8a6040' },
+    ];
+    let startAngle = -Math.PI / 2;
+    data.forEach(seg => {
+      const slice = (seg.pct / 100) * 2 * Math.PI;
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.arc(cx, cy, r, startAngle, startAngle + slice);
+      ctx.closePath();
+      ctx.fillStyle = seg.color;
+      ctx.fill();
+      ctx.strokeStyle = '#f5f3ee';
+      ctx.lineWidth = 3;
+      ctx.stroke();
+      startAngle += slice;
+    });
+    // clean donut hole removed
+  })();
 </script>
 
 </body>
